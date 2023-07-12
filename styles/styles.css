@@ -1,0 +1,89 @@
+body {
+  margin: 0px;
+  font-family: "Ysabeau SC", sans-serif;
+}
+body::-webkit-scrollbar {
+  width: 0em;
+}
+body .main-wrapper {
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+body .main-wrapper .left-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 25%;
+  height: 100%;
+  background-color: #7a9e9f;
+  overflow-y: scroll;
+}
+body .main-wrapper .left-column::-webkit-scrollbar {
+  width: 0em;
+}
+body .main-wrapper .left-column .person-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+body .main-wrapper .left-column .person-div div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+}
+body .main-wrapper .left-column .person-div div button {
+  margin: 0px 10px;
+  color: white;
+  font-size: 25px;
+  background-color: #4f6367;
+  border-radius: 5px;
+  border: none;
+  width: 30px;
+  height: 30px;
+  transition: ease-in-out 0.2s;
+}
+body .main-wrapper .left-column .person-div div button:hover {
+  cursor: pointer;
+  background-color: #fe5f55;
+  color: #4f6367;
+}
+body .main-wrapper .left-column .person-div div #counter {
+  font-size: 30px;
+  color: white;
+}
+body .main-wrapper .randomizer-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 25%;
+  height: 100vh;
+  width: 75%;
+  flex-direction: column;
+  position: fixed;
+}
+body .main-wrapper .randomizer-section .name-area {
+  text-align: center;
+}
+body .main-wrapper .randomizer-section .name-area .selected-name {
+  font-size: 60px;
+}
+body .main-wrapper .randomizer-section .btn {
+  font-family: "Ysabeau SC", sans-serif;
+  width: 200px;
+  height: 50px;
+  border-radius: 10px;
+  border: 0px;
+  font-size: 20px;
+  background-color: #4f6367;
+  transition: ease-in-out 0.2s;
+  color: white;
+}
+body .main-wrapper .randomizer-section .btn:hover {
+  transform: scale(1.1);
+  border-radius: 5px;
+  cursor: pointer;
+}/*# sourceMappingURL=styles.css.map */

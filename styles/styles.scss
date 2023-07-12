@@ -1,0 +1,92 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+body {
+  margin: 0px;
+  font-family: "Ysabeau SC", sans-serif;
+  &::-webkit-scrollbar {
+    width: 0em;
+  }
+
+  .main-wrapper {
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+
+    .left-column {
+      @include flex-center;
+      flex-direction: column;
+      width: 25%;
+      height: 100%;
+      background-color: $left-background;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 0em;
+      }
+
+      .person-div {
+        @include flex-center;
+        flex-direction: column;
+        div {
+          @include flex-center;
+          justify-content: flex-start;
+          button {
+            margin: 0px 10px;
+            color: white;
+            font-size: 25px;
+            background-color: $btn-background;
+            border-radius: 5px;
+            border: none;
+            width: 30px;
+            height: 30px;
+            transition: ease-in-out 0.2s;
+            &:hover {
+              cursor: pointer;
+              background-color: $red-color;
+              color: $btn-background;
+            }
+          }
+
+          #counter {
+            font-size: 30px;
+            color: white;
+          }
+        }
+      }
+    }
+
+    .randomizer-section {
+      @include flex-center;
+      margin-left: 25%;
+      height: 100vh;
+      width: 75%;
+      flex-direction: column;
+      position: fixed;
+
+      .name-area {
+        text-align: center;
+        .selected-name {
+          font-size: 60px;
+        }
+      }
+
+      .btn {
+        font-family: "Ysabeau SC", sans-serif;
+        width: 200px;
+        height: 50px;
+        border-radius: 10px;
+        border: 0px;
+        font-size: 20px;
+        background-color: $btn-background;
+        transition: ease-in-out 0.2s;
+        color: white;
+
+        &:hover {
+          transform: scale(1.1);
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

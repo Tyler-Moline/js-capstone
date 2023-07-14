@@ -100,7 +100,6 @@ function populateNames() {
       plusBtn.addEventListener("click", () => {
         count += 1;
         counter.textContent = count;
-        console.log(nameArray[i]);
         nameArray.push(nameArray[i]);
       });
 
@@ -108,7 +107,6 @@ function populateNames() {
         if (count > 1) {
           count -= 1;
           counter.textContent = count;
-          console.log(lengthOfArray);
           for (let i = lengthOfArray; nameArray.length > lengthOfArray; i++) {
             if (nameArray[i] === currentName) {
               nameArray.splice(i, 1);

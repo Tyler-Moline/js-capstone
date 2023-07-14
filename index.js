@@ -3,8 +3,8 @@ let nameArray = [];
 let lengthOfArray;
 
 // This is authenticating with the API and the login information
-const email = "tmoline@devpipeline.com"; //will be provided in the moodle
-const pass = "One2threesf@1";
+const email = ""; //will be provided in the moodle
+const pass = "";
 let resObject;
 const userData = {
   email: email,

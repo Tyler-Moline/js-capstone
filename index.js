@@ -1,52 +1,82 @@
-let unchangingArray = [];
-let nameArray = [];
+let unchangingArray = [
+  "Tony Stark",
+  "Bruce Banner",
+  "Wade Wilson",
+  "Natasha Romanoff",
+  "Steve Rogers",
+  "Hank Pym",
+  "Scott Lang",
+  "Peter Quill",
+  "Thor Odinson",
+  "Clint Barton",
+  "Nick Fury",
+  "Carol Danvers",
+  "Wanda Maximof",
+  "Hope Vandyne",
+];
+let nameArray = [
+  "Tony Stark",
+  "Bruce Banner",
+  "Wade Wilson",
+  "Natasha Romanoff",
+  "Steve Rogers",
+  "Hank Pym",
+  "Scott Lang",
+  "Peter Quill",
+  "Thor Odinson",
+  "Clint Barton",
+  "Nick Fury",
+  "Carol Danvers",
+  "Wanda Maximof",
+  "Hope Vandyne",
+];
 let lengthOfArray;
 
 // This is authenticating with the API and the login information
-const email = ""; //will be provided in the moodle
-const pass = "";
-let resObject;
-const userData = {
-  email: email,
-  password: pass,
-};
-async function auth() {
-  try {
-    const res = await fetch("https://api.devpipeline.org/user/auth", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-    const resObject = await res.json();
-    const authToken = resObject.auth_info.auth_token;
-    return authToken;
-  } catch (error) {
-    console.error("Error: ", error);
-  }
-}
+// const email = ""; //will be provided in the moodle
+// const pass = "";
+// let resObject;
+// const userData = {
+//   email: email,
+//   password: pass,
+// };
+// async function auth() {
+//   try {
+//     const res = await fetch("https://api.devpipeline.org/user/auth", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(userData),
+//     });
+//     const resObject = await res.json();
+//     const authToken = resObject.auth_info.auth_token;
+//     return authToken;
+//   } catch (error) {
+//     console.error("Error: ", error);
+//   }
+// }
 
 // This is getting all the info from the API and drilling into it and putting it into the nameArray
-async function getAll() {
-  try {
-    const getAuth = await auth();
-    const res = await fetch("https://api.devpipeline.org/users", {
-      headers: { auth_token: getAuth },
-    });
-    const allUsers = await res.json();
-    resObject = allUsers.users;
-  } catch (error) {
-    console.error("Error: ", error);
-  }
-  for (i = 0; i < resObject.length; i++) {
-    unchangingArray.push(
-      `${resObject[i].first_name} ${resObject[i].last_name}`
-    );
-  }
-  nameArray = unchangingArray;
-  lengthOfArray = nameArray.length;
-}
+// async function getAll() {
+//   try {
+//     const getAuth = await auth();
+//     const res = await fetch("https://api.devpipeline.org/users", {
+//       headers: { auth_token: getAuth },
+//     });
+//     const allUsers = await res.json();
+//     resObject = allUsers.users;
+//   } catch (error) {
+//     console.error("Error: ", error);
+//   }
+//   for (i = 0; i < resObject.length; i++) {
+//     unchangingArray.push(
+//       `${resObject[i].first_name} ${resObject[i].last_name}`
+//     );
+//   }
+//   nameArray = unchangingArray;
+//   lengthOfArray = nameArray.length;
+// }
 
 async function nameFlipper() {
   function delay() {
@@ -66,65 +96,99 @@ async function nameFlipper() {
 // This is the function that populates the left list and sets the event
 // listeners for the plus and minus buttons
 function populateNames() {
-  getAll().then(() => {
-    for (let i = 0; i < nameArray.length; i++) {
-      const name = document.createElement("h1");
-      const personWrapper = document.createElement("div");
-      const bottomBtnWrapper = document.createElement("div");
-      const plusBtn = document.createElement("button");
-      const minusBtn = document.createElement("button");
-      let count = 1;
-      let counter = document.createElement("span");
+  // getAll().then(() => {
+  for (let i = 0; i < nameArray.length; i++) {
+    const name = document.createElement("h1");
+    const personWrapper = document.createElement("div");
+    const bottomBtnWrapper = document.createElement("div");
+    const plusBtn = document.createElement("button");
+    const minusBtn = document.createElement("button");
+    let count = 1;
+    let counter = document.createElement("span");
 
-      counter.id = "counter";
-      plusBtn.id = "plus";
-      minusBtn.id = "minus";
-      personWrapper.id = `${nameArray[i]}Div`;
-      personWrapper.classList.add("person-div");
+    counter.id = "counter";
+    plusBtn.id = "plus";
+    minusBtn.id = "minus";
+    personWrapper.id = `${nameArray[i]}Div`;
+    personWrapper.classList.add("person-div");
 
-      count = 1;
+    count = 1;
+    counter.textContent = count;
+    plusBtn.textContent = "+";
+    minusBtn.textContent = "-";
+
+    name.textContent = nameArray[i];
+    let currentName = nameArray[i];
+
+    leftColumn.appendChild(personWrapper);
+    personWrapper.appendChild(name);
+    personWrapper.appendChild(bottomBtnWrapper);
+    bottomBtnWrapper.appendChild(minusBtn);
+    bottomBtnWrapper.appendChild(counter);
+    bottomBtnWrapper.appendChild(plusBtn);
+
+    plusBtn.addEventListener("click", () => {
+      count += 1;
       counter.textContent = count;
-      plusBtn.textContent = "+";
-      minusBtn.textContent = "-";
+      nameArray.push(nameArray[i]);
+    });
 
-      name.textContent = nameArray[i];
-      let currentName = nameArray[i];
-
-      leftColumn.appendChild(personWrapper);
-      personWrapper.appendChild(name);
-      personWrapper.appendChild(bottomBtnWrapper);
-      bottomBtnWrapper.appendChild(minusBtn);
-      bottomBtnWrapper.appendChild(counter);
-      bottomBtnWrapper.appendChild(plusBtn);
-
-      plusBtn.addEventListener("click", () => {
-        count += 1;
+    minusBtn.addEventListener("click", () => {
+      if (count > 1) {
+        count -= 1;
         counter.textContent = count;
-        nameArray.push(nameArray[i]);
-      });
-
-      minusBtn.addEventListener("click", () => {
-        if (count > 1) {
-          count -= 1;
-          counter.textContent = count;
-          for (let i = lengthOfArray; nameArray.length > lengthOfArray; i++) {
-            if (nameArray[i] === currentName) {
-              nameArray.splice(i, 1);
-              i -= 1;
-              break;
-            }
+        for (let i = lengthOfArray; nameArray.length > lengthOfArray; i++) {
+          if (nameArray[i] === currentName) {
+            nameArray.splice(i, 1);
+            i -= 1;
+            break;
           }
         }
-      });
-    }
-  });
+      }
+    });
+  }
 }
+// }
 
 // This gets a random name from the nameArray then removes one instance of that name so it cant
 // be chosen again. once the array is empty it populates it again
 function getRandomName() {
   if (nameArray.length === 0) {
-    getAll();
+    // getAll();
+    unchangingArray = [
+      "Tony Stark",
+      "Bruce Banner",
+      "Wade Wilson",
+      "Natasha Romanoff",
+      "Steve Rogers",
+      "Hank Pym",
+      "Scott Lang",
+      "Peter Quill",
+      "Thor Odinson",
+      "Clint Barton",
+      "Nick Fury",
+      "Carol Danvers",
+      "Wanda Maximof",
+      "Hope Vandyne",
+    ];
+
+    nameArray = [
+      "Tony Stark",
+      "Bruce Banner",
+      "Wade Wilson",
+      "Natasha Romanoff",
+      "Steve Rogers",
+      "Hank Pym",
+      "Scott Lang",
+      "Peter Quill",
+      "Thor Odinson",
+      "Clint Barton",
+      "Nick Fury",
+      "Carol Danvers",
+      "Wanda Maximof",
+      "Hope Vandyne",
+    ];
+
     selectedName.textContent = "You've selected all students, lets start again";
     for (let i of counter) {
       i.innerText = 1;
